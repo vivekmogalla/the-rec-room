@@ -29,9 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 ####################
+# Secret key in the development is different to the production secret key
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 
-# NOTES: WHEN THIS IS IN USE, IMAGES DON'T WORK
+# SECURITY WARNING: don't run with debug turned on in production
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 # DEBUG = True
 
@@ -223,6 +224,7 @@ if USE_SPACES:
     # }
 else:
     STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
